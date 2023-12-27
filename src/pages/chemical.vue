@@ -1,29 +1,52 @@
 <template>
-<!-- ทดสอบ 1-->
-  <div class="q-pa-md" style="max-width: 300px">
+  <div class="q-pa-md" style="max-width: 400px">
     <div class="q-gutter-md">
-      <q-badge color="ิblue
-      " multi-line> Model: "{{ model }}" </q-badge>
-
-      <q-select
+    <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
+    <q-select
         filled
         v-model="model"
         :options="options"
         label="การป้องกันด้วยสารเคมี"
       />
+      <q-badge color="blue" multi-line v-if="model!=null"> ชนิดของสารเคมี: "{{ model.label }}" </q-badge>
+      <q-badge color="blue" multi-line  v-if="model!=null"> คำอธิบายวิธีการใช้สารเคมี: "{{ model.description }}" </q-badge>
+
+      <q-input
+        filled
+        v-model="model.label" v-if="model!=null"
+        label="ชนิดของสารเคมี  *"
+      />
+      <q-input
+        filled
+        v-model="model.description" v-if="model!=null"
+        label="คำอธิบายวิธีการใช้สารเคมี *"
+      />
+      <div>
+        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+      </div>
+    </q-form>
     </div>
   </div>
 </template>
 
 <script>
+import { useQuasar } from 'quasar'
 import { ref } from "vue";
 
 export default {
   setup() {
-    return {
-      model: ref(null),
+    const $q = useQuasar()
 
-      options: [
+    const name = ref(null)
+    const age = ref(null)
+    const accept = ref(false)
+    const model= ref(null)
+    const options= [
         {
           label: "เมทาแลกซิล 35% ดีเอส",
           value: "1",
@@ -150,8 +173,41 @@ export default {
           description: "ป้องกันกำจัดโรคใบไหม้แผลใหญ่,ใช้ในอัตรา 30 กรัมต่อน้ำ 20 ลิตร พ่นทุก 7-10 วัน",
           category: "21",
         },
-      ],
-    };
+      ]
+
+    return {
+      name,
+      age,
+      accept,
+      model,
+      options,
+      onSubmit () {
+        if (accept.value !== true) {
+          $q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: 'You need to accept the license and terms first'
+          })
+        }
+        else {
+          $q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Submitted'
+          })
+        }
+      },
+
+      onReset () {
+        name.value = null
+        age.value = null
+        accept.value = false
+      }
+
+    }
   },
 };
 </script>
+

@@ -1,52 +1,29 @@
 <template>
+<!-- ทดสอบ 1-->
   <div class="q-pa-md" style="max-width: 400px">
     <div class="q-gutter-md">
-    <q-form
-      @submit="onSubmit"
-      @reset="onReset"
-      class="q-gutter-md"
-    >
-    <q-select
+      <q-badge color="ิblue
+      " multi-line> Model: "{{ model }}" </q-badge>
+
+      <q-select
         filled
         v-model="model"
         :options="options"
         label="ตรวจโรค"
       />
-      <q-badge color="blue" multi-line v-if="model!=null"> ชนิดของโรค: "{{ model.label }}" </q-badge>
-      <q-badge color="blue" multi-line  v-if="model!=null"> : คำอธิบายเชื้อสาเหตุและลักษณะอาการ: "{{ model.description }}" </q-badge>
-
-      <q-input
-        filled
-        v-model="model.label" v-if="model!=null"
-        label=" วิชนิดของโรค *"
-      />
-      <q-input
-        filled
-        v-model="model.description" v-if="model!=null"
-        label="คำอธิบายเชื้อสาเหตุและลักษณะอาการ *"
-      />
-      <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-      </div>
-    </q-form>
     </div>
   </div>
 </template>
 
 <script>
-import { useQuasar } from 'quasar'
 import { ref } from "vue";
 
 export default {
   setup() {
-    const $q = useQuasar()
+    return {
+      model: ref(null),
 
-    const name = ref(null)
-    const age = ref(null)
-    const accept = ref(false)
-    const model= ref(null)
-    const options= [
+      options: [
         {
           label: "โรคราน้ำค้าง",
           value: "1",
@@ -83,41 +60,8 @@ export default {
           description: "เซื้อสารเหตุเกืดจาก Sugarcane mosaic virus, ลักษณะอาการ ข้าวโพดมีอาการใบด่างลายเขียวซีดสลับเขียวเข้มขนานไปกับความยาวของเส้นกลางใบ ในระยะต้นโตพบเปลือกหุ้มฝักข้าวโพดเป็นสีขาวตั้งแต่ฝักเล็กจนถึงฝักโหญ่ ",
           category: "6",
         },
-      ]
-
-    return {
-      name,
-      age,
-      accept,
-      model,
-      options,
-      onSubmit () {
-        if (accept.value !== true) {
-          $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'You need to accept the license and terms first'
-          })
-        }
-        else {
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted'
-          })
-        }
-      },
-
-      onReset () {
-        name.value = null
-        age.value = null
-        accept.value = false
-      }
-
-    }
+      ],
+    };
   },
 };
 </script>
-

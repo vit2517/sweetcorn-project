@@ -54,7 +54,7 @@ const linksList = [
     title: 'ตรวจแปลง',
     caption: 'ตรวจแปลง',
     icon: 'leafcorn',
-    link: 'servey'
+    link: '/servey'
   },
   {
     title: 'ตรวจโรค',
@@ -66,13 +66,19 @@ const linksList = [
     title: 'ป้องกันด้วยสารเคมี',
     caption: 'ป้องกันด้วยสารเคมี',
     icon: 'bug',
-    link: 'chemical'
+    link: '/chemical'
   },
   {
     title: 'ป้องกันด้วยเขตกรรม',
     caption: 'ป้องกันด้วยเขตกรรม',
     icon: 'landscape',
-    link: 'protection'
+    link: '/protection'
+  },
+  {
+    title: 'ทดสอบ',
+    caption: 'ทดสอบ',
+    icon: 'landscape',
+    link: '/test'
   },
 ]
 

@@ -1,29 +1,52 @@
 <template>
-<!-- ทดสอบ 1-->
-  <div class="q-pa-md" style="max-width: 300px">
+  <div class="q-pa-md" style="max-width: 400px">
     <div class="q-gutter-md">
-      <q-badge color="ิblue
-      " multi-line> Model: "{{ model }}" </q-badge>
-
-      <q-select
+    <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
+    <q-select
         filled
         v-model="model"
         :options="options"
         label="ป้องกันด้วยเขตกรรม"
       />
+      <q-badge color="blue" multi-line v-if="model!=null"> วิธีการป้องกัน: "{{ model.label }}" </q-badge>
+      <q-badge color="blue" multi-line  v-if="model!=null"> คำอธิบายวิธีการป้องกัน: "{{ model.description }}" </q-badge>
+
+      <q-input
+        filled
+        v-model="model.label" v-if="model!=null"
+        label=" วิธีการป้องกัน *"
+      />
+      <q-input
+        filled
+        v-model="model.description" v-if="model!=null"
+        label="คำอธิบายวิธีการป้องกัน *"
+      />
+      <div>
+        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+      </div>
+    </q-form>
     </div>
   </div>
 </template>
 
 <script>
+import { useQuasar } from 'quasar'
 import { ref } from "vue";
 
 export default {
   setup() {
-    return {
-      model: ref(null),
+    const $q = useQuasar()
 
-      options: [
+    const name = ref(null)
+    const age = ref(null)
+    const accept = ref(false)
+    const model= ref(null)
+    const options= [
         {
           label: "โรคราน้ำค้าง",
           value: "1",
@@ -60,8 +83,40 @@ export default {
           description: "1.กำจัดพืชที่เป็นแหล่งอาศัยของเชื้อ เช่น หญ้าจอนห์สัน 2.กำจัดเพลี้ยอ่อนข้าวโพด ซึ่งเป็นแมลงพาหะนำโรค 3.ปลูกพืชหมุนเวียน 4.ใช้เมล็ดพันธุ์ต้านทานโรค 5.หลีกเลี่ยงการปลูกข้าวโพดในช่วงที่มีการระบาดของแมลงพาหะ",
           category: "6",
         },
-      ],
-    };
+      ]
+
+    return {
+      name,
+      age,
+      accept,
+      model,
+      options,
+      onSubmit () {
+        if (accept.value !== true) {
+          $q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: 'You need to accept the license and terms first'
+          })
+        }
+        else {
+          $q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Submitted'
+          })
+        }
+      },
+
+      onReset () {
+        name.value = null
+        age.value = null
+        accept.value = false
+      }
+
+    }
   },
 };
 </script>

@@ -4,6 +4,8 @@ import chemical from "pages/chemical.vue";
 import disease from "pages/disease.vue";
 import protection from "pages/protection.vue";
 import servey from "pages/servey.vue";
+import test from "pages/test.vue";
+import test1 from "pages/test1.vue";
 
 const routes = [
   {
@@ -16,6 +18,7 @@ const routes = [
 
   // Always leave this as last one,
   // but you can also remove it
+
   {
     path: '/chemical',
     component: chemical,
@@ -25,12 +28,20 @@ const routes = [
     component: disease,
   },
   {
+    path: '/protection',
+    component: protection,
+  },
+  {
     path: '/servey',
     component: servey,
   },
   {
-    path: '/protection',
-    component: protection,
+    path: '/test',
+    component: test,
+  },
+  {
+    path: '/test1',
+    component: test1,
   },
   // {
   //   path: '/:catchAll(.*)*',
