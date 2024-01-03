@@ -6,13 +6,14 @@ import protection from "pages/protection.vue";
 import servey from "pages/servey.vue";
 import test from "pages/test.vue";
 import test1 from "pages/test1.vue";
+import test2 from "pages/test2.vue";
 
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/protection.vue') }
+      { path: '', component: () => import('pages/test1.vue') }
     ]
   },
 
@@ -42,6 +43,10 @@ const routes = [
   {
     path: '/test1',
     component: test1,
+  },
+  {
+    path: '/test2',
+    component: test2,
   },
   // {
   //   path: '/:catchAll(.*)*',

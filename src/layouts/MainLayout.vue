@@ -80,6 +80,18 @@ const linksList = [
     icon: 'landscape',
     link: '/test'
   },
+  {
+  title: 'ทดสอบ1',
+    caption: 'ทดสอบ1',
+    icon: 'landscape',
+    link: '/test1'
+  },
+  {
+  title: 'ทดสอบ2',
+    caption: 'ทดสอบ2',
+    icon: 'landscape',
+    link: '/test2'
+  },
 ]
 
 export default defineComponent({
