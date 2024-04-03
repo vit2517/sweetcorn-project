@@ -7,13 +7,12 @@ import servey from "pages/servey.vue";
 import test from "pages/test.vue";
 import test1 from "pages/test1.vue";
 import test2 from "pages/test2.vue";
-
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/test1.vue') }
+      { path: '', component: () => import('pages/protection.vue') }
     ]
   },
 

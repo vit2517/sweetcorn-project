@@ -1,11 +1,7 @@
 <template>
   <div class="q-pa-md" style="max-width: 400px">
     <div class="q-gutter-md">
-    <q-form
-      @submit="onSubmit"
-      @reset="onReset"
-      class="q-gutter-md"
-    >
+    <q-form>
     <q-select
         filled
         v-model="model"
@@ -15,20 +11,6 @@
       <q-badge color="blue" multi-line v-if="model!=null"> ชนิดของโรค: "{{ model.label }}" </q-badge>
       <q-badge color="blue" multi-line  v-if="model!=null"> : คำอธิบายเชื้อสาเหตุและลักษณะอาการ: "{{ model.description }}" </q-badge>
 
-      <q-input
-        filled
-        v-model="model.label" v-if="model!=null"
-        label=" วิชนิดของโรค *"
-      />
-      <q-input
-        filled
-        v-model="model.description" v-if="model!=null"
-        label="คำอธิบายเชื้อสาเหตุและลักษณะอาการ *"
-      />
-      <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-      </div>
     </q-form>
     </div>
   </div>
@@ -42,9 +24,9 @@ export default {
   setup() {
     const $q = useQuasar()
 
-    const name = ref(null)
-    const age = ref(null)
-    const accept = ref(false)
+    // const name = ref(null)
+    // const age = ref(null)
+    // const accept = ref(false)
     const model= ref(null)
     const options= [
         {

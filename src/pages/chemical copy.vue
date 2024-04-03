@@ -1,7 +1,11 @@
 <template>
   <div class="q-pa-md" style="max-width: 400px">
     <div class="q-gutter-md">
-    <q-form>
+    <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
     <q-select
         filled
         v-model="model"
@@ -10,6 +14,21 @@
       />
       <q-badge color="blue" multi-line v-if="model!=null"> ชนิดของสารเคมี: "{{ model.label }}" </q-badge>
       <q-badge color="blue" multi-line  v-if="model!=null"> คำอธิบายวิธีการใช้สารเคมี: "{{ model.description }}" </q-badge>
+
+      <q-input
+        filled
+        v-model="model.label" v-if="model!=null"
+        label="ชนิดของสารเคมี  *"
+      />
+      <q-input
+        filled
+        v-model="model.description" v-if="model!=null"
+        label="คำอธิบายวิธีการใช้สารเคมี *"
+      />
+      <div>
+        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+      </div>
     </q-form>
     </div>
   </div>

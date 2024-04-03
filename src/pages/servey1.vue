@@ -1,7 +1,11 @@
 <template>
   <div class="q-pa-md" style="max-width: 400px">
 
-    <q-form>
+    <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
     <q-select
         filled
         v-model="model"
@@ -10,6 +14,30 @@
       />
       <q-badge color="blue" multi-line v-if="model!=null"> ประเภทการสำรวจ: "{{ model.label }}" </q-badge>
       <q-badge color="blue" multi-line  v-if="model!=null"> คำอธิบายวิธีการสำรวจ: "{{ model.description }}" </q-badge>
+      <!-- lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please type something']" -->
+      <q-input
+        filled
+        v-model="model.label" v-if="model!=null"
+        label=" ประเภทการสำรวจ *"
+      />
+      <!-- lazy-rules
+        :rules="[
+          val => val !== null && val !== '' || 'Please type your age',
+          val => val > 0 && val < 100 || 'Please type a real age'
+        ]" -->
+      <q-input
+        filled
+        v-model="model.description" v-if="model!=null"
+        label="คำอธิบายวิธีการสำรวจ *"
+      />
+
+      <!-- <q-toggle v-model="accept" label="I accept the license and terms" /> -->
+
+      <div>
+        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+      </div>
     </q-form>
 
   </div>
